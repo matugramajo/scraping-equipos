@@ -24,7 +24,20 @@ const extractTeams = async (page, categoryUrl, game) => {
                 const cleanedTeamName = teamName.replace(/\[e\]\[h\]/g, "").trim();
                 const logoElement = document.querySelector(".infobox-image img");
                 const logoUrl = logoElement ? logoElement.src : "";
-                return { teamName: cleanedTeamName, game, logoUrl, equipoUrl: teamUrl };
+
+                const instagramElement = document.querySelector('a[href*="instagram.com"]');
+                const twitterElement = document.querySelector('a[href*="twitter.com"]');
+                const instagramUrl = instagramElement ? instagramElement.href : "";
+                const twitterUrl = twitterElement ? twitterElement.href : "";
+
+                return {
+                    teamName: cleanedTeamName,
+                    game,
+                    logoUrl,
+                    equipoUrl: teamUrl,
+                    instagram: instagramUrl,
+                    twitter: twitterUrl,
+                };
             },
             game,
             teamUrl
